@@ -1,58 +1,28 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  useColorScheme,
-  View,
-} from 'react-native';
-import MapView from 'react-native-maps';
+import React, { useState } from 'react';
+import { Button, Platform, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+
+const STYLES = ['default', 'dark-content', 'light-content'];
+const TRANSITIONS = ['fade', 'slide', 'none'];
+import AppNavigation from './src/router/AppNavigation';
 
 
 const App = () => {
 
-  return (
-    <SafeAreaView style={{ flex: 1 }} >
-      <MapView
-        style={styles.map}
+  const [hidden, setHidden] = useState(false);
 
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      />
+  return (
+    <SafeAreaView style={{ flex: 1 }}  >
+      <StatusBar
+        animated={true}
+        backgroundColor="#61dafb"
+        barStyle={STYLES[0]}
+        showHideTransition={TRANSITIONS[0]}
+        hidden={hidden} />
+
+      <AppNavigation />
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  map: { flex: 1 }
-});
 
 export default App;
